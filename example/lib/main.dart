@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:native_add/native_add.dart' as native_add;
 
 void main() {
   runApp(const MyApp());
@@ -15,14 +12,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late int sumResult;
-  late Future<int> sumAsyncResult;
-
   @override
   void initState() {
     super.initState();
-    sumResult = native_add.sum(1, 2);
-    sumAsyncResult = native_add.sumAsync(3, 4);
   }
 
   @override
@@ -44,25 +36,8 @@ class _MyAppState extends State<MyApp> {
                   textAlign: .center,
                 ),
                 spacerSmall,
-                Text(
-                  'sum(1, 2) = $sumResult',
-                  style: textStyle,
-                  textAlign: .center,
-                ),
+                Text('sum(1, 2) = 2', style: textStyle, textAlign: .center),
                 spacerSmall,
-                FutureBuilder<int>(
-                  future: sumAsyncResult,
-                  builder: (BuildContext context, AsyncSnapshot<int> value) {
-                    final displayValue = (value.hasData)
-                        ? value.data
-                        : 'loading';
-                    return Text(
-                      'await sumAsync(3, 4) = $displayValue',
-                      style: textStyle,
-                      textAlign: .center,
-                    );
-                  },
-                ),
               ],
             ),
           ),

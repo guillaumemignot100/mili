@@ -1,15 +1,15 @@
 # Run with `dart run ffigen --config ffigen.yaml`.
-name: NativeAddBindings
+name: MilibrisReaderBindings
 description: |
-  Bindings for `src/native_add.h`.
+  Bindings for `src/milibris_reader.h`.
 
   Regenerate bindings with `dart run ffigen --config ffigen.yaml`.
-output: 'lib/native_add_bindings_generated.dart'
+output: 'lib/milibris_reader_bindings_generated.dart'
 headers:
   entry-points:
-    - 'src/native_add.h'
+    - 'src/milibris_reader.h'
   include-directives:
-    - 'src/native_add.h'
+    - 'src/milibris_reader.h'
 comments:
   style: any
   length: full

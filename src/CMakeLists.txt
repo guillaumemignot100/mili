@@ -20,3 +20,4 @@ if (ANDROID)
   # Support Android 15 16k page size
   target_link_options(native_add PRIVATE "-Wl,-z,max-page-size=16384")
 endif()
+# TODO(guillaume): remove
