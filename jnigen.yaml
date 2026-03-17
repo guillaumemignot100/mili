@@ -1,0 +1,23 @@
+output:
+  dart:
+    path: lib/src/android/milibris_ffi_bindings.g.dart
+    structure: single_file
+
+# Use the downloaded JARs locally
+class_path:
+  - '.jnigen_deps/classes.jar'
+  - '.jnigen_deps/tasks/classes.jar'
+
+android_sdk_config:
+  sdk_root: '/Users/guillaume/Library/Android/sdk' #TODO(guillaume): remove this
+  versions:
+    - '35'
+
+classes:
+  # Milibris API
+  - 'com.milibris.foundation.Foundation'
+  - 'com.milibris.foundation.FoundationContext'
+  - 'com.milibris.foundation.CompleteArchive'
+
+summarizer:
+  backend: asm

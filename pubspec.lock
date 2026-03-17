@@ -243,6 +243,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      sha256: "87721a4a50b19c7f1d49001e51409bddc46303966ce89a65af4f4e6004896412"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.0"
   http_multi_server:
     dependency: transitive
     description:
@@ -267,14 +275,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  jni:
+    dependency: "direct main"
+    description:
+      name: jni
+      sha256: "8706a77e94c76fe9ec9315e18949cc9479cc03af97085ca9c1077b61323ea12d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.2"
   jnigen:
     dependency: "direct dev"
     description:
       name: jnigen
-      sha256: "1e404d9c66980c0e90e9bf0d56b5d45bda46f0c1570bb81e2821e923d1ea368d"
+      sha256: dcb5927c2b15ddd3bfcd1b13a13c063828ac4e495f9f87dd11e7968f68114ac7
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.3"
+    version: "0.15.0"
   json_annotation:
     dependency: transitive
     description:
@@ -562,4 +578,4 @@ packages:
     version: "2.2.4"
 sdks:
   dart: ">=3.11.1 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  flutter: ">=3.35.6"

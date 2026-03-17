@@ -1,8 +1,5 @@
-group = "com.milibris.milibris_reader"
+group = "com.theodo.milibris_ffi"
 version = "1.0"
-
-// Milibris
-ext.readerVersion = "1.18.0"
 
 buildscript {
     repositories {
@@ -20,7 +17,7 @@ apply plugin: "com.android.library"
 
 android {
     if (project.android.hasProperty("namespace")) {
-        namespace = "com.milibris.milibris_reader"
+        namespace = "com.milibris.milibris_ffi"
     }
 
     compileSdkVersion 34
@@ -45,4 +42,12 @@ android {
             path "CMakeLists.txt"
         }
     }
+}
+
+dependencies {
+    def miLibrisReader = "1.18.0"
+    api("com.milibris:one-reader:${miLibrisReader}") {
+        exclude group: "androidx.lifecycle"
+    }
+    api "com.milibris:milibris-reader:${miLibrisReader}"
 }

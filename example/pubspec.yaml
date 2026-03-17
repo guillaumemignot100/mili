@@ -1,5 +1,5 @@
-name: native_add_example
-description: 'Demonstrates how to use the milibris_reader plugin.'
+name: milibris_ffi_example
+description: 'Demonstrates how to use the milibris_ffi plugin.'
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -10,10 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  milibris_reader:
+  milibris_ffi:
     path: ..
-
+  jni: ^0.15.2
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
