@@ -26,11 +26,13 @@ class MlArchiveFfi {
     final errorPtr = pkg_ffi.calloc<ffi.Pointer<objc.ObjCObjectImpl>>();
 
     try {
+      print('----');
       final success = MLArchive.extract(
         archiveUrl,
         inDirectory: destUrl,
         error: errorPtr,
       );
+      print(success);
 
       if (!success) {
         var message = 'Extraction failed.';
@@ -40,7 +42,7 @@ class MlArchiveFfi {
             retain: true,
             release: true,
           );
-          message = nsError.localizedDescription.toString();
+          message = nsError.localizedDescription.toDartString();
         }
         throw FfiArchiveError(message: message);
       }

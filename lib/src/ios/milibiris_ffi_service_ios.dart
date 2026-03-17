@@ -21,15 +21,9 @@ class MlArchiveServiceIos {
   /// Extracts the archive at [archivePath] into [destPath].
   ///
   /// Throws [MlArchiveException] on failure.
-  void extractArchive({
-    required String archivePath,
-    required String destPath,
-  }) {
+  void extractArchive({required String archivePath, required String destPath}) {
     try {
-      MlArchiveFfi.extractArchive(
-        archivePath: archivePath,
-        destPath: destPath,
-      );
+      MlArchiveFfi.extractArchive(archivePath: archivePath, destPath: destPath);
     } on FfiArchiveError catch (e) {
       throw MlArchiveException(message: e.message);
     }

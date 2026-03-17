@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:milibris_ffi/milibris_ffi.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,29 +38,31 @@ class _UnpackPageState extends State<UnpackPage> {
     });
 
     try {
-      final destPath = Directory.systemTemp.path;
+      final destDir = Directory('${Directory.systemTemp.path}/mili_out');
+      if (destDir.existsSync()) destDir.deleteSync(recursive: true);
+      destDir.createSync();
+      final destPath = destDir.path;
 
       final fileName = 'fc7558b2-3baf-46d5-82b1-7287a44cd269.complete';
+      final appFilesDir = await getApplicationSupportDirectory();
+      final archPath = '${appFilesDir.path}/$fileName';
 
       if (Platform.isAndroid) {
         final release = _ffi.unpackArchive(
-          archivePath: '/sdcard/Download/$fileName',
+          archivePath: archPath,
           destinationPath: destPath,
         );
         setState(() => _status = 'Bridge OK. Result: $release');
       } else if (Platform.isIOS) {
-        _ffi.extractArchive(
-          archivePath: '/var/mobile/Documents/$fileName',
-          destPath: destPath,
-        );
+        _ffi.extractArchive(archivePath: archPath, destPath: destPath);
         setState(() => _status = 'Bridge OK. Archive extracted to $destPath');
       } else {
         setState(() => _status = 'Unsupported platform.');
       }
     } on PlatformException catch (e) {
       setState(
-        () =>
-            _status = 'Bridge reached native. Error [${e.code}]: ${e.message}',
+        () => _status =
+            'Bridge reached native. Error [${e.code}]: ${e.message}\nDetails: ${e.details}',
       );
     } catch (e) {
       setState(() => _status = 'Error: $e');
