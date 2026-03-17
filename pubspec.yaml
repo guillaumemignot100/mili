@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   jni: ^0.15.2
+  objective_c: ^9.1.0
   plugin_platform_interface: ^2.0.2
 
 dev_dependencies:

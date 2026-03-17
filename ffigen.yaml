@@ -1,15 +1,15 @@
 # Run with `dart run ffigen --config ffigen.yaml`.
-name: MilibrisReaderBindings
+name: MilibrisFFIBindings
 description: |
-  Bindings for `src/milibris_reader.h`.
+  Bindings for `src/milibris_ffi.h`.
 
   Regenerate bindings with `dart run ffigen --config ffigen.yaml`.
-output: 'lib/milibris_reader_bindings_generated.dart'
+output: 'lib/milibris_ffi_bindings_generated.dart'
 headers:
   entry-points:
-    - 'src/milibris_reader.h'
+    - 'src/milibris_ffi.h'
   include-directives:
-    - 'src/milibris_reader.h'
+    - 'src/milibris_ffi.h'
 comments:
   style: any
   length: full

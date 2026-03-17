@@ -1,21 +1,28 @@
 PODS:
   - Flutter (1.0.0)
-  - native_add (0.0.1):
+  - milibris_ffi (0.0.1):
     - Flutter
+  - sqflite_darwin (0.0.4):
+    - Flutter
+    - FlutterMacOS
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - native_add (from `.symlinks/plugins/native_add/ios`)
+  - milibris_ffi (from `.symlinks/plugins/milibris_ffi/ios`)
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  native_add:
-    :path: ".symlinks/plugins/native_add/ios"
+  milibris_ffi:
+    :path: ".symlinks/plugins/milibris_ffi/ios"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  native_add: 07c9fb20462d93dc35a6cb54341493d8cecca8fe
+  milibris_ffi: dc019dc2785814a40e4c83e37e82692423e7f8fb
+  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
 
 PODFILE CHECKSUM: 3c63482e143d1b91d2d2560aee9fb04ecc74ac7e
 

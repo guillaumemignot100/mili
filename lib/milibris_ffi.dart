@@ -1,13 +1,28 @@
+import 'dart:io';
+
 import 'package:jni/jni.dart';
+import 'package:milibris_ffi/src/android/milibris_ffi_android.dart';
+import 'package:milibris_ffi/src/ios/milibris_ffi_ios.dart';
 
-import 'src/android/milibris_ffi_android.dart';
-
-/// Entry point for Milibris FFI operations on Android.
+/// Entry point for Milibris FFI operations.
 class MilibrisFFI {
   /// Creates a new [MilibrisFFI].
   MilibrisFFI();
 
   final _android = MilibrisFFIAndroid();
+  final _ios = MilibrisFFIIos();
+
+  /// Extracts an archive at [archivePath] into [destPath].
+  ///
+  /// On iOS, uses the native C FFI. Throws [PlatformException] on failure.
+  /// On other platforms, throws [UnsupportedError].
+  void extractArchive({required String archivePath, required String destPath}) {
+    if (Platform.isIOS) {
+      _ios.extractArchive(archivePath: archivePath, destPath: destPath);
+    } else {
+      throw UnsupportedError('extractArchive is only supported on iOS.');
+    }
+  }
 
   /// Unpacks an archive from a file path to [destinationPath].
   ///

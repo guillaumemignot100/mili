@@ -39,13 +39,23 @@ class _UnpackPageState extends State<UnpackPage> {
     try {
       final destPath = Directory.systemTemp.path;
 
-      final release = _ffi.unpackArchive(
-        archivePath:
-            '/sdcard/Download/fc7558b2-3baf-46d5-82b1-7287a44cd269.complete',
-        destinationPath: destPath,
-      );
+      final fileName = 'fc7558b2-3baf-46d5-82b1-7287a44cd269.complete';
 
-      setState(() => _status = 'Bridge OK. Result: $release');
+      if (Platform.isAndroid) {
+        final release = _ffi.unpackArchive(
+          archivePath: '/sdcard/Download/$fileName',
+          destinationPath: destPath,
+        );
+        setState(() => _status = 'Bridge OK. Result: $release');
+      } else if (Platform.isIOS) {
+        _ffi.extractArchive(
+          archivePath: '/var/mobile/Documents/$fileName',
+          destPath: destPath,
+        );
+        setState(() => _status = 'Bridge OK. Archive extracted to $destPath');
+      } else {
+        setState(() => _status = 'Unsupported platform.');
+      }
     } on PlatformException catch (e) {
       setState(
         () =>
