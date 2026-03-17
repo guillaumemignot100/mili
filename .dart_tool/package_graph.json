@@ -10,6 +10,7 @@
         "ffi",
         "flutter",
         "jni",
+        "objective_c",
         "plugin_platform_interface"
       ],
       "devDependencies": [
@@ -17,7 +18,15 @@
         "ffigen",
         "flutter_lints",
         "flutter_test",
-        "jnigen"
+        "jnigen",
+        "theodo_analysis"
+      ]
+    },
+    {
+      "name": "theodo_analysis",
+      "version": "1.11.0",
+      "dependencies": [
+        "flutter"
       ]
     },
     {
@@ -37,13 +46,6 @@
       ]
     },
     {
-      "name": "flutter_lints",
-      "version": "6.0.0",
-      "dependencies": [
-        "lints"
-      ]
-    },
-    {
       "name": "flutter_test",
       "version": "0.0.0",
       "dependencies": [
@@ -59,6 +61,13 @@
         "stream_channel",
         "test_api",
         "vector_math"
+      ]
+    },
+    {
+      "name": "flutter_lints",
+      "version": "6.0.0",
+      "dependencies": [
+        "lints"
       ]
     },
     {
@@ -124,6 +133,19 @@
       "version": "2.1.8",
       "dependencies": [
         "meta"
+      ]
+    },
+    {
+      "name": "objective_c",
+      "version": "9.3.0",
+      "dependencies": [
+        "code_assets",
+        "collection",
+        "ffi",
+        "hooks",
+        "logging",
+        "native_toolchain_c",
+        "pub_semver"
       ]
     },
     {
@@ -224,11 +246,6 @@
       "dependencies": []
     },
     {
-      "name": "lints",
-      "version": "6.1.0",
-      "dependencies": []
-    },
-    {
       "name": "stream_channel",
       "version": "2.1.4",
       "dependencies": [
@@ -301,6 +318,11 @@
         "string_scanner",
         "term_glyph"
       ]
+    },
+    {
+      "name": "lints",
+      "version": "6.1.0",
+      "dependencies": []
     },
     {
       "name": "yaml_edit",
@@ -545,6 +567,38 @@
         "source_span",
         "watcher",
         "yaml"
+      ]
+    },
+    {
+      "name": "native_toolchain_c",
+      "version": "0.17.6",
+      "dependencies": [
+        "code_assets",
+        "glob",
+        "hooks",
+        "logging",
+        "meta",
+        "pub_semver"
+      ]
+    },
+    {
+      "name": "hooks",
+      "version": "1.0.2",
+      "dependencies": [
+        "collection",
+        "crypto",
+        "logging",
+        "meta",
+        "pub_semver",
+        "yaml"
+      ]
+    },
+    {
+      "name": "code_assets",
+      "version": "1.0.0",
+      "dependencies": [
+        "collection",
+        "hooks"
       ]
     },
     {

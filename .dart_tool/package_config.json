@@ -98,6 +98,12 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "code_assets",
+      "rootUri": "file:///Users/guillaume/.pub-cache/hosted/pub.dev/code_assets-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.9"
+    },
+    {
       "name": "code_builder",
       "rootUri": "file:///Users/guillaume/.pub-cache/hosted/pub.dev/code_builder-4.11.1",
       "packageUri": "lib/",
@@ -186,6 +192,12 @@
       "rootUri": "file:///Users/guillaume/.pub-cache/hosted/pub.dev/graphs-2.3.2",
       "packageUri": "lib/",
       "languageVersion": "3.4"
+    },
+    {
+      "name": "hooks",
+      "rootUri": "file:///Users/guillaume/.pub-cache/hosted/pub.dev/hooks-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.10"
     },
     {
       "name": "http",
@@ -282,6 +294,18 @@
       "rootUri": "file:///Users/guillaume/.pub-cache/hosted/pub.dev/mime-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
+    },
+    {
+      "name": "native_toolchain_c",
+      "rootUri": "file:///Users/guillaume/.pub-cache/hosted/pub.dev/native_toolchain_c-0.17.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.10"
+    },
+    {
+      "name": "objective_c",
+      "rootUri": "file:///Users/guillaume/.pub-cache/hosted/pub.dev/objective_c-9.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.10"
     },
     {
       "name": "package_config",
@@ -384,6 +408,12 @@
       "rootUri": "file:///Users/guillaume/.pub-cache/hosted/pub.dev/test_api-0.7.10",
       "packageUri": "lib/",
       "languageVersion": "3.7"
+    },
+    {
+      "name": "theodo_analysis",
+      "rootUri": "file:///Users/guillaume/.pub-cache/hosted/pub.dev/theodo_analysis-1.11.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "typed_data",

@@ -536,6 +536,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.10"
+  theodo_analysis:
+    dependency: "direct dev"
+    description:
+      name: theodo_analysis
+      sha256: "958ba60ac4ad49fad97c1789c996c2b9e96aac1792ff5bc04899680732f5c7f8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.11.0"
   typed_data:
     dependency: transitive
     description:
