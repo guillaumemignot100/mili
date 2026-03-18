@@ -1,5 +1,5 @@
-import UIKit
 import MiLibrisReaderSDK
+import UIKit
 
 /// Opens the MiLibris reader from a C-callable entry point.
 /// Called via Dart FFI using @_cdecl to avoid any native code in the host app.
@@ -16,6 +16,7 @@ public func milibrisOpenReader(
     let languageCode = languageCodeStr.isEmpty ? nil : LanguageCode(rawValue: languageCodeStr)
     var config = ReaderConfig()
     config.features.printPageEnabled = true
+    config.features.isSummaryEnabled = false
     let reader = Reader(
       releasePath: releaseUrl,
       articlesLanguageCode: languageCode,

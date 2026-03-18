@@ -141,6 +141,7 @@ class MilibrisFFIJni {
       final ctx = Jni.androidApplicationContext;
       final settings = ReaderSettings.new$2();
       settings.setPrintEnabled(true);
+      settings.setSummaryEnabled(false);
       final dataSource = XmlPdfReaderDataSource(settings, null);
       dataSource.init(ctx, contentPath.toJString());
 
