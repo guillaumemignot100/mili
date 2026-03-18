@@ -1,6 +1,16 @@
 import MiLibrisReaderSDK
 import UIKit
 
+extension NavigationBarConfig {
+  mutating func applyLogoOnly() {
+    colors.titleText = .clear
+    colors.subtitleText = .clear
+    colors.background = .white
+    colors.progressbarFill = .red
+    colors.progressbarBackground = .yellow
+  }
+}
+
 /// Opens the MiLibris reader from a C-callable entry point.
 /// Called via Dart FFI using @_cdecl to avoid any native code in the host app.
 @_cdecl("milibris_open_reader")
@@ -17,6 +27,21 @@ public func milibrisOpenReader(
     var config = ReaderConfig()
     config.features.printPageEnabled = true
     config.features.isSummaryEnabled = false
+
+    config.applyBranding(
+      mainTintColor: .black,
+      mainTintColorComplement: .white,
+      logoImage: UIImage(named: "Logo"),
+      logoBackgroundColor: .white
+    )
+
+    // White header background, no title/subtitle — logo only.
+    config.colors.background = .white
+    config.navigationBar.applyLogoOnly()
+    config.summary.navigationBar.applyLogoOnly()
+    config.articleReader.navigationBar.applyLogoOnly()
+    config.articleReader.summary.navigationBar.applyLogoOnly()
+
     let reader = Reader(
       releasePath: releaseUrl,
       articlesLanguageCode: languageCode,

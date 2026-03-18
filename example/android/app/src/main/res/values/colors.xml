@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="or_progress_color">#FF0000</color>
+        <color name="or_progress_background_color">#FFFF00</color>
+
+</resources>

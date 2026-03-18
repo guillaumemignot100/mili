@@ -92,6 +92,8 @@ class MilibrisFFIJni {
   // Raw JNI for Android framework calls not covered by generated bindings.
   static final _intentClass = JClass.forName('android/content/Intent');
   static final _contextClass = JClass.forName('android/content/Context');
+  static final _resourcesClass = JClass.forName('android/content/res/Resources');
+  static final _integerClass = JClass.forName('java/lang/Integer');
 
   static final _idAddFlags = _intentClass.instanceMethodId(
     r'addFlags',
@@ -101,38 +103,121 @@ class MilibrisFFIJni {
     r'startActivity',
     r'(Landroid/content/Intent;)V',
   );
+  static final _idGetResources = _contextClass.instanceMethodId(
+    r'getResources',
+    r'()Landroid/content/res/Resources;',
+  );
+  static final _idGetPackageName = _contextClass.instanceMethodId(
+    r'getPackageName',
+    r'()Ljava/lang/String;',
+  );
+  static final _idGetIdentifier = _resourcesClass.instanceMethodId(
+    r'getIdentifier',
+    r'(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I',
+  );
+  static final _idValueOf = _integerClass.staticMethodId(
+    r'valueOf',
+    r'(I)Ljava/lang/Integer;',
+  );
 
-  static final _callObjectInt1 = jni$.ProtectedJniExtensions.lookup<
-    jni$.NativeFunction<
-      jni$.JniResult Function(
-        jni$.Pointer<jni$.Void>,
-        jni$.JMethodIDPtr,
-        jni$.VarArgs<(jni$.Int32,)>,
-      )
-    >
-  >('globalEnv_CallObjectMethod').asFunction<
-    jni$.JniResult Function(
-      jni$.Pointer<jni$.Void>,
-      jni$.JMethodIDPtr,
-      int,
-    )
-  >();
+  // CallObjectMethod — int arg (e.g. addFlags)
+  static final _callObjectInt1 =
+      jni$.ProtectedJniExtensions.lookup<
+            jni$.NativeFunction<
+              jni$.JniResult Function(
+                jni$.Pointer<jni$.Void>,
+                jni$.JMethodIDPtr,
+                jni$.VarArgs<(jni$.Int32,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$.JniResult Function(
+              jni$.Pointer<jni$.Void>,
+              jni$.JMethodIDPtr,
+              int,
+            )
+          >();
 
-  static final _callVoid1 = jni$.ProtectedJniExtensions.lookup<
-    jni$.NativeFunction<
-      jni$.JThrowablePtr Function(
-        jni$.Pointer<jni$.Void>,
-        jni$.JMethodIDPtr,
-        jni$.VarArgs<(jni$.Pointer<jni$.Void>,)>,
-      )
-    >
-  >('globalEnv_CallVoidMethod').asFunction<
-    jni$.JThrowablePtr Function(
-      jni$.Pointer<jni$.Void>,
-      jni$.JMethodIDPtr,
-      jni$.Pointer<jni$.Void>,
-    )
-  >();
+  // CallObjectMethod — no extra args (e.g. getResources, getPackageName)
+  static final _callObject0 =
+      jni$.ProtectedJniExtensions.lookup<
+            jni$.NativeFunction<
+              jni$.JniResult Function(
+                jni$.Pointer<jni$.Void>,
+                jni$.JMethodIDPtr,
+                jni$.VarArgs<()>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$.JniResult Function(
+              jni$.Pointer<jni$.Void>,
+              jni$.JMethodIDPtr,
+            )
+          >();
+
+  // CallIntMethod — 3 pointer args (e.g. getIdentifier)
+  static final _callInt3Ptrs =
+      jni$.ProtectedJniExtensions.lookup<
+            jni$.NativeFunction<
+              jni$.JniResult Function(
+                jni$.Pointer<jni$.Void>,
+                jni$.JMethodIDPtr,
+                jni$.VarArgs<(
+                  jni$.Pointer<jni$.Void>,
+                  jni$.Pointer<jni$.Void>,
+                  jni$.Pointer<jni$.Void>,
+                )>,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$.JniResult Function(
+              jni$.Pointer<jni$.Void>,
+              jni$.JMethodIDPtr,
+              jni$.Pointer<jni$.Void>,
+              jni$.Pointer<jni$.Void>,
+              jni$.Pointer<jni$.Void>,
+            )
+          >();
+
+  // CallStaticObjectMethod — int arg (e.g. Integer.valueOf)
+  static final _callStaticObject1Int =
+      jni$.ProtectedJniExtensions.lookup<
+            jni$.NativeFunction<
+              jni$.JniResult Function(
+                jni$.Pointer<jni$.Void>,
+                jni$.JMethodIDPtr,
+                jni$.VarArgs<(jni$.Int32,)>,
+              )
+            >
+          >('globalEnv_CallStaticObjectMethod')
+          .asFunction<
+            jni$.JniResult Function(
+              jni$.Pointer<jni$.Void>,
+              jni$.JMethodIDPtr,
+              int,
+            )
+          >();
+
+  static final _callVoid1 =
+      jni$.ProtectedJniExtensions.lookup<
+            jni$.NativeFunction<
+              jni$.JThrowablePtr Function(
+                jni$.Pointer<jni$.Void>,
+                jni$.JMethodIDPtr,
+                jni$.VarArgs<(jni$.Pointer<jni$.Void>,)>,
+              )
+            >
+          >('globalEnv_CallVoidMethod')
+          .asFunction<
+            jni$.JThrowablePtr Function(
+              jni$.Pointer<jni$.Void>,
+              jni$.JMethodIDPtr,
+              jni$.Pointer<jni$.Void>,
+            )
+          >();
 
   /// Launches [OneReaderActivity] for the unpacked release at [contentPath].
   /// Throws [JniNativeError] on failure.
@@ -142,6 +227,37 @@ class MilibrisFFIJni {
       final settings = ReaderSettings.new$2();
       settings.setPrintEnabled(true);
       settings.setSummaryEnabled(false);
+
+      // Look up R.drawable.milibris at runtime and set it as the reader logo.
+      final resources = _callObject0(
+        ctx.reference.pointer,
+        _idGetResources as jni$.JMethodIDPtr,
+      ).object(JObject.type);
+      final packageName = _callObject0(
+        ctx.reference.pointer,
+        _idGetPackageName as jni$.JMethodIDPtr,
+      ).object(JObject.type);
+      final nameStr = 'milibris'.toJString();
+      final typeStr = 'drawable'.toJString();
+      final resId = _callInt3Ptrs(
+        resources.reference.pointer,
+        _idGetIdentifier as jni$.JMethodIDPtr,
+        nameStr.reference.pointer,
+        typeStr.reference.pointer,
+        packageName.reference.pointer,
+      ).integer;
+      final logoInt = _callStaticObject1Int(
+        _integerClass.reference.pointer,
+        _idValueOf as jni$.JMethodIDPtr,
+        resId,
+      ).object(JInteger.type);
+      settings.setLogo(logoInt);
+      resources.release();
+      packageName.release();
+      nameStr.release();
+      typeStr.release();
+      logoInt.release();
+
       final dataSource = XmlPdfReaderDataSource(settings, null);
       dataSource.init(ctx, contentPath.toJString());
 
