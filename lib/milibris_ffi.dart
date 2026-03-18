@@ -69,12 +69,18 @@ class MilibrisFFI {
   /// Launches the reader for the unpacked release at [contentPath].
   ///
   /// On Android, uses JNI to start [OneReaderActivity].
+  /// On iOS, uses FFI to call the native Swift bridge.
+  /// [languageCode] is iOS-only and optional (e.g. `'frFR'`).
   /// Throws [PlatformException] on failure.
-  void openReader({required String contentPath}) {
+  void openReader({required String contentPath, String languageCode = ''}) {
     if (Platform.isAndroid) {
       _android.openReader(contentPath: contentPath);
+    } else if (Platform.isIOS) {
+      _ios.openReader(releasePath: contentPath, languageCode: languageCode);
     } else {
-      throw UnsupportedError('openReader is only supported on Android.');
+      throw UnsupportedError(
+        'openReader is only supported on Android and iOS.',
+      );
     }
   }
 }

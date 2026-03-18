@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>MLPDFReaderSDKLicenceKey</key>
+	<string>AcAoQtQw8l6hldtPNap9gB/3pv1OmU5ZGeTmUf8caNcxaZi/ZJ/OFvzD3t9KD/k9sCbtxtgGBRUCTPg11J9INsXef0cwdQbwYO5Uyp1bJZ5pE8F7jrGNoj5ArnfyeV311vlZGSM5t36axaYvEnBIrUEoCAfFnjtb1GalNsTB7HuqTU1CMXYDjnV9QnBghkOYhIKyMM7R14yWiVDNDccC0BH4RCuMl5YlI+CaKbRtXjK6e3qiG2r10nphDhrhxx8fnzZaHK4Jg6Jbp3xlu1e3FdMoKNP5jNI7Z9RvsWgdGzvArro3QemnXpGyuabZ9Cjt1VE/jXrXCxSW3y813f6P9A==</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

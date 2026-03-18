@@ -28,4 +28,14 @@ class MlArchiveServiceIos {
       throw MlArchiveException(message: e.message);
     }
   }
+
+  /// Opens the reader for the release at [releasePath].
+  ///
+  /// [languageCode] is optional (e.g. `'frFR'`).
+  void openReader({required String releasePath, String languageCode = ''}) {
+    MlReaderFfi.openReader(
+      releasePath: releasePath,
+      languageCode: languageCode,
+    );
+  }
 }

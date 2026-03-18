@@ -11,6 +11,32 @@ class FfiArchiveError {
   final String message;
 }
 
+final _openReaderFn = ffi.DynamicLibrary.process().lookupFunction<
+  ffi.Void Function(ffi.Pointer<pkg_ffi.Utf8>, ffi.Pointer<pkg_ffi.Utf8>),
+  void Function(ffi.Pointer<pkg_ffi.Utf8>, ffi.Pointer<pkg_ffi.Utf8>)
+>('milibris_open_reader');
+
+/// Pure FFI wrapper around the MiLibrisReaderSDK Reader API.
+abstract final class MlReaderFfi {
+  /// Opens the reader for the release at [releasePath].
+  ///
+  /// [languageCode] is optional (e.g. `'frFR'`). Pass empty string to use the
+  /// SDK default.
+  static void openReader({
+    required String releasePath,
+    String languageCode = '',
+  }) {
+    final releasePathPtr = releasePath.toNativeUtf8();
+    final languageCodePtr = languageCode.toNativeUtf8();
+    try {
+      _openReaderFn(releasePathPtr, languageCodePtr);
+    } finally {
+      pkg_ffi.calloc.free(releasePathPtr);
+      pkg_ffi.calloc.free(languageCodePtr);
+    }
+  }
+}
+
 /// Pure FFI wrapper around the MLArchive ObjC API.
 class MlArchiveFfi {
   const MlArchiveFfi._();

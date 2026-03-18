@@ -17,4 +17,11 @@ class MilibrisFFIIos {
       throw PlatformException(code: 'extraction_failed', message: e.message);
     }
   }
+
+  /// Opens the reader for the release at [releasePath].
+  ///
+  /// [languageCode] is optional (e.g. `'frFR'`).
+  void openReader({required String releasePath, String languageCode = ''}) {
+    _service.openReader(releasePath: releasePath, languageCode: languageCode);
+  }
 }

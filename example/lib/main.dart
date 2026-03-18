@@ -56,7 +56,8 @@ class _UnpackPageState extends State<UnpackPage> {
         setState(() => _status = 'Bridge OK. Reader opened.');
       } else if (Platform.isIOS) {
         _ffi.extractArchive(archivePath: archPath, destPath: destPath);
-        setState(() => _status = 'Bridge OK. Archive extracted to $destPath');
+        _ffi.openReader(contentPath: destPath);
+        setState(() => _status = 'Bridge OK. Reader opened.');
       } else {
         setState(() => _status = 'Unsupported platform.');
       }
