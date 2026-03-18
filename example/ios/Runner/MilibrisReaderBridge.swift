@@ -14,10 +14,12 @@ public func milibrisOpenReader(
   DispatchQueue.main.async {
     let releaseUrl = URL(fileURLWithPath: releasePath)
     let languageCode = languageCodeStr.isEmpty ? nil : LanguageCode(rawValue: languageCodeStr)
+    var config = ReaderConfig()
+    config.features.printPageEnabled = true
     let reader = Reader(
       releasePath: releaseUrl,
       articlesLanguageCode: languageCode,
-      config: ReaderConfig()
+      config: config
     )
 
     guard
