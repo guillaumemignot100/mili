@@ -48,11 +48,12 @@ class _UnpackPageState extends State<UnpackPage> {
       final archPath = '${appFilesDir.path}/$fileName';
 
       if (Platform.isAndroid) {
-        final release = _ffi.unpackArchive(
+        _ffi.unpackArchive(
           archivePath: archPath,
           destinationPath: destPath,
         );
-        setState(() => _status = 'Bridge OK. Result: $release');
+        _ffi.openReader(contentPath: destPath);
+        setState(() => _status = 'Bridge OK. Reader opened.');
       } else if (Platform.isIOS) {
         _ffi.extractArchive(archivePath: archPath, destPath: destPath);
         setState(() => _status = 'Bridge OK. Archive extracted to $destPath');

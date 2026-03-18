@@ -105,4 +105,19 @@ class MilibrisFFIServiceAndroid {
       );
     }
   }
+
+  /// Launches the reader for the unpacked release at [contentPath].
+  ///
+  /// Throws [MilibrisFFIException] on failure.
+  void openReader({required String contentPath}) {
+    try {
+      _jni.openReader(contentPath: contentPath);
+    } on JniNativeError catch (e) {
+      throw MilibrisFFIException(
+        code: .unpackFailed,
+        message: 'Failed to open reader',
+        details: e.details,
+      );
+    }
+  }
 }

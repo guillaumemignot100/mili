@@ -1,4 +1,4 @@
-package com.example.native_add_example
+package com.visuamobile.liberation
 
 import io.flutter.embedding.android.FlutterActivity
 

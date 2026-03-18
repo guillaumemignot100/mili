@@ -65,4 +65,16 @@ class MilibrisFFI {
       destinationFile: destinationFile,
     );
   }
+
+  /// Launches the reader for the unpacked release at [contentPath].
+  ///
+  /// On Android, uses JNI to start [OneReaderActivity].
+  /// Throws [PlatformException] on failure.
+  void openReader({required String contentPath}) {
+    if (Platform.isAndroid) {
+      _android.openReader(contentPath: contentPath);
+    } else {
+      throw UnsupportedError('openReader is only supported on Android.');
+    }
+  }
 }

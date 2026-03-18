@@ -73,4 +73,19 @@ class MilibrisFFIAndroid {
       );
     }
   }
+
+  /// Launches the reader for the unpacked release at [contentPath].
+  ///
+  /// Throws [PlatformException] on failure.
+  void openReader({required String contentPath}) {
+    try {
+      _service.openReader(contentPath: contentPath);
+    } on MilibrisFFIException catch (e) {
+      throw PlatformException(
+        code: e.code.name,
+        message: e.message,
+        details: e.details,
+      );
+    }
+  }
 }
