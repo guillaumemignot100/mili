@@ -11,20 +11,18 @@ This documents how to configure the environment so the **Test FFI Bridge** butto
 
 ## Android
 
-The app cannot access `/sdcard/Download/` on Android 10+ without special permissions. Copy the file into the app's internal files directory instead.
+The app uses `getExternalStorageDirectory()` (app-scoped external storage — no permissions required). Push the file directly there via adb.
 
 ```bash
-# 1. Push the file to sdcard (adb always has access here)
-adb push /path/to/<uuid>.complete /sdcard/tmp.complete
+# 1. Push the file directly to the app's external files directory
+#    (adb has write access here without needing run-as)
+adb push /path/to/<uuid>.complete /sdcard/Android/data/com.visuamobile.liberation/files/<uuid>.complete
 
-# 2. Copy into the app's internal files directory
-adb shell "cat /sdcard/tmp.complete | run-as com.visuamobile.liberation tee /data/data/com.visuamobile.liberation/files/<uuid>.complete > /dev/null"
-
-# 3. Verify
-adb shell run-as com.visuamobile.liberation ls -lh /data/data/com.visuamobile.liberation/files/
+# 2. Verify
+adb shell ls -lh /sdcard/Android/data/com.visuamobile.liberation/files/
 ```
 
-The app reads from `getApplicationSupportDirectory()` which maps to `/data/data/com.visuamobile.liberation/files/`.
+The app reads from `getExternalStorageDirectory()` which maps to `/sdcard/Android/data/com.visuamobile.liberation/files/`.
 
 ---
 

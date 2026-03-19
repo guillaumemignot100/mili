@@ -44,20 +44,35 @@ class _UnpackPageState extends State<UnpackPage> {
       final destPath = destDir.path;
 
       final fileName = 'fc7558b2-3baf-46d5-82b1-7287a44cd269.complete';
-      final appFilesDir = await getApplicationSupportDirectory();
-      final archPath = '${appFilesDir.path}/$fileName';
 
       if (Platform.isAndroid) {
-        _ffi.unpackArchive(
-          archivePath: archPath,
-          destinationPath: destPath,
+        final externalDir = await getExternalStorageDirectory();
+        if (externalDir == null)
+          throw Exception('External storage unavailable');
+        final archivePath = '${externalDir.path}/$fileName';
+        _ffi.unpackArchive(archivePath: archivePath, destinationPath: destPath);
+        _ffi.openReader(contentPath: destPath);
+        final archiveSize = File(archivePath).lengthSync();
+        final extractedSize = _dirSize(destDir);
+        setState(
+          () => _status =
+              'Bridge OK. Reader opened.\n'
+              'Archive: ${_formatBytes(archiveSize)}\n'
+              'Extracted: ${_formatBytes(extractedSize)}',
         );
-        _ffi.openReader(contentPath: destPath);
-        setState(() => _status = 'Bridge OK. Reader opened.');
       } else if (Platform.isIOS) {
-        _ffi.extractArchive(archivePath: archPath, destPath: destPath);
+        final appFilesDir = await getApplicationSupportDirectory();
+        final archivePath = '${appFilesDir.path}/$fileName';
+        _ffi.extractArchive(archivePath: archivePath, destPath: destPath);
         _ffi.openReader(contentPath: destPath);
-        setState(() => _status = 'Bridge OK. Reader opened.');
+        final archiveSize = File(archivePath).lengthSync();
+        final extractedSize = _dirSize(destDir);
+        setState(
+          () => _status =
+              'Bridge OK. Reader opened.\n'
+              'Archive: ${_formatBytes(archiveSize)}\n'
+              'Extracted: ${_formatBytes(extractedSize)}',
+        );
       } else {
         setState(() => _status = 'Unsupported platform.');
       }
@@ -71,6 +86,17 @@ class _UnpackPageState extends State<UnpackPage> {
     } finally {
       setState(() => _loading = false);
     }
+  }
+
+  int _dirSize(Directory dir) => dir
+      .listSync(recursive: true)
+      .whereType<File>()
+      .fold(0, (s, f) => s + f.lengthSync());
+
+  String _formatBytes(int bytes) {
+    if (bytes < 1024) return '$bytes B';
+    if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
+    return '${(bytes / (1024 * 1024)).toStringAsFixed(2)} MB';
   }
 
   @override
