@@ -2,6 +2,7 @@
 import 'package:jni/_internal.dart' as jni$;
 import 'package:jni/jni.dart';
 import 'package:milibris_ffi/src/android/milibris_ffi_bindings.g.dart';
+import 'package:milibris_ffi/src/reader_customization.dart';
 
 /// Raw error from native Android APIs.
 class JniNativeError {
@@ -92,7 +93,9 @@ class MilibrisFFIJni {
   // Raw JNI for Android framework calls not covered by generated bindings.
   static final _intentClass = JClass.forName('android/content/Intent');
   static final _contextClass = JClass.forName('android/content/Context');
-  static final _resourcesClass = JClass.forName('android/content/res/Resources');
+  static final _resourcesClass = JClass.forName(
+    'android/content/res/Resources',
+  );
   static final _integerClass = JClass.forName('java/lang/Integer');
 
   static final _idAddFlags = _intentClass.instanceMethodId(
@@ -151,10 +154,7 @@ class MilibrisFFIJni {
             >
           >('globalEnv_CallObjectMethod')
           .asFunction<
-            jni$.JniResult Function(
-              jni$.Pointer<jni$.Void>,
-              jni$.JMethodIDPtr,
-            )
+            jni$.JniResult Function(jni$.Pointer<jni$.Void>, jni$.JMethodIDPtr)
           >();
 
   // CallIntMethod — 3 pointer args (e.g. getIdentifier)
@@ -164,11 +164,13 @@ class MilibrisFFIJni {
               jni$.JniResult Function(
                 jni$.Pointer<jni$.Void>,
                 jni$.JMethodIDPtr,
-                jni$.VarArgs<(
-                  jni$.Pointer<jni$.Void>,
-                  jni$.Pointer<jni$.Void>,
-                  jni$.Pointer<jni$.Void>,
-                )>,
+                jni$.VarArgs<
+                  (
+                    jni$.Pointer<jni$.Void>,
+                    jni$.Pointer<jni$.Void>,
+                    jni$.Pointer<jni$.Void>,
+                  )
+                >,
               )
             >
           >('globalEnv_CallIntMethod')
@@ -221,12 +223,20 @@ class MilibrisFFIJni {
 
   /// Launches [OneReaderActivity] for the unpacked release at [contentPath].
   /// Throws [JniNativeError] on failure.
-  void openReader({required String contentPath}) {
+  void openReader({
+    required String contentPath,
+    ReaderCustomization? customization,
+  }) {
     try {
       final ctx = Jni.androidApplicationContext;
       final settings = ReaderSettings.new$2();
       settings.setPrintEnabled(true);
-      settings.setSummaryEnabled(false);
+      settings.setSummaryEnabled(
+        customization?.reader?.isSummaryEnabled ?? false,
+      );
+      settings.setEnabledDoublePage(
+        customization?.reader?.isDoublePagesEnabled ?? false,
+      );
 
       // Look up R.drawable.milibris at runtime and set it as the reader logo.
       final resources = _callObject0(

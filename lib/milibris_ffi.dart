@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:jni/jni.dart';
 import 'package:milibris_ffi/src/android/milibris_ffi_android.dart';
 import 'package:milibris_ffi/src/ios/milibris_ffi_ios.dart';
+import 'package:milibris_ffi/src/reader_customization.dart';
+
+export 'package:milibris_ffi/src/reader_customization.dart';
 
 /// Entry point for Milibris FFI operations.
 class MilibrisFFI {
@@ -72,11 +75,22 @@ class MilibrisFFI {
   /// On iOS, uses FFI to call the native Swift bridge.
   /// [languageCode] is iOS-only and optional (e.g. `'frFR'`).
   /// Throws [PlatformException] on failure.
-  void openReader({required String contentPath, String languageCode = ''}) {
+  void openReader({
+    required String contentPath,
+    String languageCode = '',
+    ReaderCustomization? customization,
+  }) {
     if (Platform.isAndroid) {
-      _android.openReader(contentPath: contentPath);
+      _android.openReader(
+        contentPath: contentPath,
+        customization: customization,
+      );
     } else if (Platform.isIOS) {
-      _ios.openReader(releasePath: contentPath, languageCode: languageCode);
+      _ios.openReader(
+        releasePath: contentPath,
+        languageCode: languageCode,
+        customization: customization,
+      );
     } else {
       throw UnsupportedError(
         'openReader is only supported on Android and iOS.',

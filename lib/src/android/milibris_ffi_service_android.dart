@@ -1,5 +1,6 @@
 import 'package:jni/jni.dart';
 import 'package:milibris_ffi/src/android/milibris_ffi_jni.dart';
+import 'package:milibris_ffi/src/reader_customization.dart';
 
 /// Error codes for Milibris FFI operations.
 enum MilibrisFFIErrorCode {
@@ -109,9 +110,12 @@ class MilibrisFFIServiceAndroid {
   /// Launches the reader for the unpacked release at [contentPath].
   ///
   /// Throws [MilibrisFFIException] on failure.
-  void openReader({required String contentPath}) {
+  void openReader({
+    required String contentPath,
+    ReaderCustomization? customization,
+  }) {
     try {
-      _jni.openReader(contentPath: contentPath);
+      _jni.openReader(contentPath: contentPath, customization: customization);
     } on JniNativeError catch (e) {
       throw MilibrisFFIException(
         code: .unpackFailed,

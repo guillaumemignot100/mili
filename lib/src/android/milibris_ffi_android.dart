@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:jni/jni.dart';
 import 'package:milibris_ffi/src/android/milibris_ffi_service_android.dart';
+import 'package:milibris_ffi/src/reader_customization.dart';
 
 /// Android implementation of Milibris FFI operations.
 /// Wraps [MilibrisFFIServiceAndroid] and converts [MilibrisFFIException]
@@ -77,9 +78,15 @@ class MilibrisFFIAndroid {
   /// Launches the reader for the unpacked release at [contentPath].
   ///
   /// Throws [PlatformException] on failure.
-  void openReader({required String contentPath}) {
+  void openReader({
+    required String contentPath,
+    ReaderCustomization? customization,
+  }) {
     try {
-      _service.openReader(contentPath: contentPath);
+      _service.openReader(
+        contentPath: contentPath,
+        customization: customization,
+      );
     } on MilibrisFFIException catch (e) {
       throw PlatformException(
         code: e.code.name,

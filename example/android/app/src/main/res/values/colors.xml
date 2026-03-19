@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="or_progress_color">#FF0000</color>
-        <color name="or_progress_background_color">#FFFF00</color>
+    <!-- NavBar: backgroundColor -->
+    <color name="or_toolbar_background_color_light">#FF007F</color>
+    <color name="or_toolbar_background_color_dark">#7F00FF</color>
 
+    <!-- NavBar: buttonsTintColor -->
+    <color name="or_navigation_button_tint_light">#FFFF00</color>
+    <color name="or_navigation_button_tint_dark">#FFFF00</color>
+
+    <!-- NavBar: titleTextColor -->
+    <color name="or_toolbar_title_text_light">#00FF00</color>
+    <color name="or_toolbar_title_text_dark">#FF6600</color>
+
+    <!-- NavBar: subtitleTextColor -->
+    <color name="or_toolbar_subtitle_text_light">#00FFFF</color>
+    <color name="or_toolbar_subtitle_text_dark">#00FFFF</color>
+
+    <!-- NavBar: progressbarBackgroundColor -->
+    <color name="or_progress_background_color">#FF0000</color>
+
+    <!-- NavBar: progressbarFillColor -->
+    <color name="or_progress_color">#00FF00</color>
+
+    <!-- NavBar: logoBackgroundColor -->
+    <color name="or_logo_capsule_color_light">#FFFF00</color>
+    <color name="or_logo_capsule_color_dark">#0000FF</color>
+
+    <!-- Reader: backgroundColor -->
+    <color name="or_background_color">#FFF9C4</color>
+
+    <!-- MiniSummary: separatorColor -->
+    <color name="or_mini_summary_separator_light">#3F51B5</color>
+    <color name="or_mini_summary_separator_dark">#3F51B5</color>
 </resources>

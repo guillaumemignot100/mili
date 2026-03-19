@@ -5,6 +5,38 @@ import 'package:flutter/services.dart';
 import 'package:milibris_ffi/milibris_ffi.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// Loud test customization — replace with your real values.
+const _testCustomization = ReaderCustomization(
+  navBar: NavBarCustomization(
+    backgroundColor: ReaderColor(
+      light: Color(0xFFFF007F), // hot pink
+      dark: Color(0xFF7F00FF),  // purple
+    ),
+    buttonsTintColor: ReaderColor.unified(Color(0xFFFFFF00)), // yellow
+    titleTextColor: ReaderColor(
+      light: Color(0xFF00FF00), // lime green (light)
+      dark: Color(0xFFFF6600),  // orange (dark)
+    ),
+    subtitleTextColor: ReaderColor.unified(Color(0xFF00FFFF)), // cyan
+    progressbarBackgroundColor: ReaderColor.unified(Color(0xFFFF0000)), // red
+    progressbarFillColor: ReaderColor.unified(Color(0xFF00FF00)),       // green
+    logoBackgroundColor: ReaderColor(
+      light: Color(0xFFFFFF00), // yellow (light)
+      dark: Color(0xFF0000FF),  // blue (dark)
+    ),
+    logoBorderColor: ReaderColor.unified(Color(0xFFFF00FF)), // magenta
+  ),
+  reader: ReaderViewCustomization(
+    backgroundColor: ReaderColor.unified(Color(0xFFFFF9C4)), // pale yellow
+    isDoublePagesEnabled: false,
+    isSummaryEnabled: false,
+  ),
+  miniSummary: MiniSummaryCustomization(
+    cellTitleTextColor: ReaderColor.unified(Color(0xFFE91E63)), // pink
+    separatorColor: ReaderColor.unified(Color(0xFF3F51B5)),     // indigo
+  ),
+);
+
 void main() {
   runApp(const MyApp());
 }
@@ -51,7 +83,10 @@ class _UnpackPageState extends State<UnpackPage> {
           throw Exception('External storage unavailable');
         final archivePath = '${externalDir.path}/$fileName';
         _ffi.unpackArchive(archivePath: archivePath, destinationPath: destPath);
-        _ffi.openReader(contentPath: destPath);
+        _ffi.openReader(
+          contentPath: destPath,
+          customization: _testCustomization,
+        );
         final archiveSize = File(archivePath).lengthSync();
         final extractedSize = _dirSize(destDir);
         setState(
@@ -64,7 +99,10 @@ class _UnpackPageState extends State<UnpackPage> {
         final appFilesDir = await getApplicationSupportDirectory();
         final archivePath = '${appFilesDir.path}/$fileName';
         _ffi.extractArchive(archivePath: archivePath, destPath: destPath);
-        _ffi.openReader(contentPath: destPath);
+        _ffi.openReader(
+          contentPath: destPath,
+          customization: _testCustomization,
+        );
         final archiveSize = File(archivePath).lengthSync();
         final extractedSize = _dirSize(destDir);
         setState(
