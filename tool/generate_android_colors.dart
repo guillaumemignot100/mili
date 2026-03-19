@@ -1,9 +1,11 @@
-// ignore_for_file: avoid_print, dangling_library_doc_comments
+// ignore_for_file: avoid_print, dangling_library_doc_comments,
+//   avoid_relative_lib_imports
 
 /// Generates Android color resources from the reader customization.
 ///
-/// Keep the values here in sync with `_testCustomization` in
-/// `example/lib/main.dart`, then run:
+/// Color values are read from `example/lib/test_colors.dart` — the same
+/// source used by `_testCustomization` in `example/lib/main.dart`.
+/// Edit `test_colors.dart`, then run:
 ///
 ///   dart run tool/generate_android_colors.dart
 ///
@@ -13,28 +15,30 @@
 
 import 'dart:io';
 
-// ─── Edit these to match _testCustomization in example/lib/main.dart ─────────
+import '../example/lib/test_colors.dart';
+
+// ─── Mapping from shared constants to Android resource fields ────────────────
 
 const _config = _AndroidColors(
   // NavBar
-  navBarBackgroundLight:     0xFFFF007F, // hot pink
-  navBarBackgroundDark:      0xFF7F00FF, // purple
-  navBarButtonsTintLight:    0xFFFFFF00, // yellow
-  navBarButtonsTintDark:     0xFFFFFF00, // yellow (unified)
-  navBarTitleTextLight:      0xFF00FF00, // lime green
-  navBarTitleTextDark:       0xFFFF6600, // orange
-  navBarSubtitleTextLight:   0xFF00FFFF, // cyan
-  navBarSubtitleTextDark:    0xFF00FFFF, // cyan (unified)
-  navBarProgressBackground:  0xFFFF0000, // red
-  navBarProgressFill:        0xFF00FF00, // green
-  navBarLogoCapsuleLight:    0xFFFFFF00, // yellow
-  navBarLogoCapsuleDark:     0xFF0000FF, // blue
+  navBarBackgroundLight:     kNavBarBackgroundLight,
+  navBarBackgroundDark:      kNavBarBackgroundDark,
+  navBarButtonsTintLight:    kNavBarButtonsTint,
+  navBarButtonsTintDark:     kNavBarButtonsTint,
+  navBarTitleTextLight:      kNavBarTitleTextLight,
+  navBarTitleTextDark:       kNavBarTitleTextDark,
+  navBarSubtitleTextLight:   kNavBarSubtitleText,
+  navBarSubtitleTextDark:    kNavBarSubtitleText,
+  navBarProgressBackground:  kNavBarProgressBg,
+  navBarProgressFill:        kNavBarProgressFill,
+  navBarLogoCapsuleLight:    kNavBarLogoCapLight,
+  navBarLogoCapsuleDark:     kNavBarLogoCapDark,
   // Reader
-  readerBackground:          0xFFFFF9C4, // pale yellow
+  readerBackground:          kReaderBackground,
   // MiniSummary
-  miniSummaryCellTitleText:  0xFFE91E63, // pink
-  miniSummarySeparatorLight: 0xFF3F51B5, // indigo
-  miniSummarySeparatorDark:  0xFF3F51B5, // indigo (unified)
+  miniSummaryCellTitleText:  kMiniSummaryCellTitle,
+  miniSummarySeparatorLight: kMiniSummarySeparator,
+  miniSummarySeparatorDark:  kMiniSummarySeparator,
 );
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -5,35 +5,38 @@ import 'package:flutter/services.dart';
 import 'package:milibris_ffi/milibris_ffi.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'test_colors.dart';
+
 /// Loud test customization — replace with your real values.
+/// Colors are defined in `test_colors.dart` and shared with the Android
+/// generator (`tool/generate_android_colors.dart`).
 const _testCustomization = ReaderCustomization(
   navBar: NavBarCustomization(
     backgroundColor: ReaderColor(
-      light: Color(0xFFFF007F), // hot pink
-      dark: Color(0xFF7F00FF),  // purple
+      light: Color(kNavBarBackgroundLight),
+      dark: Color(kNavBarBackgroundDark),
     ),
-    buttonsTintColor: ReaderColor.unified(Color(0xFFFFFF00)), // yellow
+    buttonsTintColor: ReaderColor.unified(Color(kNavBarButtonsTint)),
     titleTextColor: ReaderColor(
-      light: Color(0xFF00FF00), // lime green (light)
-      dark: Color(0xFFFF6600),  // orange (dark)
+      light: Color(kNavBarTitleTextLight),
+      dark: Color(kNavBarTitleTextDark),
     ),
-    subtitleTextColor: ReaderColor.unified(Color(0xFF00FFFF)), // cyan
-    progressbarBackgroundColor: ReaderColor.unified(Color(0xFFFF0000)), // red
-    progressbarFillColor: ReaderColor.unified(Color(0xFF00FF00)),       // green
+    subtitleTextColor: ReaderColor.unified(Color(kNavBarSubtitleText)),
+    progressbarBackgroundColor: ReaderColor.unified(Color(kNavBarProgressBg)),
+    progressbarFillColor: ReaderColor.unified(Color(kNavBarProgressFill)),
     logoBackgroundColor: ReaderColor(
-      light: Color(0xFFFFFF00), // yellow (light)
-      dark: Color(0xFF0000FF),  // blue (dark)
+      light: Color(kNavBarLogoCapLight),
+      dark: Color(kNavBarLogoCapDark),
     ),
-    logoBorderColor: ReaderColor.unified(Color(0xFFFF00FF)), // magenta
   ),
   reader: ReaderViewCustomization(
-    backgroundColor: ReaderColor.unified(Color(0xFFFFF9C4)), // pale yellow
+    backgroundColor: ReaderColor.unified(Color(kReaderBackground)),
     isDoublePagesEnabled: false,
     isSummaryEnabled: false,
   ),
   miniSummary: MiniSummaryCustomization(
-    cellTitleTextColor: ReaderColor.unified(Color(0xFFE91E63)), // pink
-    separatorColor: ReaderColor.unified(Color(0xFF3F51B5)),     // indigo
+    cellTitleTextColor: ReaderColor.unified(Color(kMiniSummaryCellTitle)),
+    separatorColor: ReaderColor.unified(Color(kMiniSummarySeparator)),
   ),
 );
 

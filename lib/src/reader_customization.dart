@@ -36,7 +36,6 @@ class NavBarCustomization {
     this.progressbarBackgroundColor,
     this.progressbarFillColor,
     this.logoBackgroundColor,
-    this.logoBorderColor,
   });
 
   /// Android: `or_toolbar_background_color_light/_dark`
@@ -72,9 +71,6 @@ class NavBarCustomization {
   /// Android: `or_logo_capsule_color_light`
   /// iOS: `colors.logoBackground`
   final ReaderColor? logoBackgroundColor;
-
-  /// iOS: `colors.logoBorder`
-  final ReaderColor? logoBorderColor;
 }
 
 /// Customization for the main reader view.
