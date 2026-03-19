@@ -32,6 +32,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.milibris.pdfreader.licencekey"
+            android:value="cNjIN7rdqcuFh16VTmT3eklJKYgqfDvh3iBHlraQYdEno0tqgq2FOvzl1l+Lx0fFMmbvD1M4qM3hTOjAvQAc+9obrx9IySRk0pgnGcAEoS3noeZtKtHMWnriHa+42tucY92DZuKFhL8u3L2xWT/OBzEECndD+tE54782CrsWLNzId1Lm70ccEm9NCtQumGlX3chxbknmq3Xn8d5s4COj4rRkjMN1GxJUkIjEveIX1+jm8cMZ6OplxoBBhrfhvxdIJHjt+L/6EeO8j62MhmF4n3NkNLL5bXp9xbQ4cQWwOlIQy0tyTDajvklClvQr7phZoLLsAo01G1g2G6K/ms2r8Q==" />
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
